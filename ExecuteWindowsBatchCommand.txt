@@ -1,0 +1,17 @@
+echo Kill anything running on port 3000 to avoid conflict
+for /f "tokens=5" %%a in ('netstat -a -n -o ^| findstr :3000') do taskkill /PID %%a /F
+
+echo Change to the app directory
+cd D:\MCA sem II\DevOps\my-node-app
+
+echo Install dependencies
+call npm install
+
+echo Start the app in a new window (non-blocking)
+node index.js
+
+echo Optional: Wait a few seconds and check the app is up
+timeout /t 5
+curl http://localhost:3000
+
+
